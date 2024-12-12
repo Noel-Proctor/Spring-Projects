@@ -9,5 +9,5 @@ public interface CategoryService {
     void createCategory(Category category);
 
 
-
+    String deleteCategory(long categoryId);
 }
