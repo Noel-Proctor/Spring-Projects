@@ -1,10 +1,24 @@
 package com.ecommerce.store.model;
 
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Category {
 
-    private long categoryId;
+    @Id
+    private Long categoryId;
     private String categoryName;
 
+    public Category(long categoryId, String categoryName) {
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
+    }
+
+    public Category() {
+
+    }
 
     public long getCategoryId() {
         return categoryId;
@@ -22,10 +36,7 @@ public class Category {
         this.categoryName = categoryName;
     }
 
-    public Category(long categoryId, String categoryName) {
-        this.categoryId = categoryId;
-        this.categoryName = categoryName;
-    }
+
 
 
 }
