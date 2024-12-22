@@ -1,11 +1,11 @@
 package com.ecommerce.store.service.CategoryService;
 
+import com.ecommerce.store.exceptions.APIException;
+import com.ecommerce.store.exceptions.ResourceNotFoundException;
 import com.ecommerce.store.model.Category;
 import com.ecommerce.store.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,18 +13,27 @@ import java.util.Optional;
 @Service
 public class CategoryServiceImplementation implements CategoryService {
 
-    private long nextId = 1L;
-
     @Autowired
     private CategoryRepository categoryRepository;
 
     @Override
     public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
+
+        List<Category> categories = categoryRepository.findAll();
+        if (categories.isEmpty()) {
+            throw new APIException("No categories currently exist in the database. Please add a category and try again");
+        }
+        return categories;
     }
 
     @Override
     public void createCategory(Category category) {
+        Category  savedCategory = categoryRepository.findByCategoryName(category.getCategoryName());
+
+        if (savedCategory != null) {
+            throw new APIException("Category with name "+category.getCategoryName()+" already exists");
+        }
+
         categoryRepository.save(category);
     }
 
@@ -36,7 +45,7 @@ public class CategoryServiceImplementation implements CategoryService {
             categoryRepository.delete(categoryToBeDeleted.get());
             return "Category " + categoryId + " successfully deleted";
         }
-        return "Category " + categoryId + " does not exist.";
+        throw new APIException(String.format("No category with ID %s exists in database.", categoryId));
     }
 
 
@@ -51,7 +60,7 @@ public class CategoryServiceImplementation implements CategoryService {
             return "Category " + categoryIn.getCategoryId() + " successfully update";
 
         }else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category does not exist.");
+            throw new ResourceNotFoundException("Category", "Id", categoryIn.getCategoryId());
         }
     }
 
