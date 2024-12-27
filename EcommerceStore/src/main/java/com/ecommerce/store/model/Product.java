@@ -36,21 +36,7 @@ public class Product {
     @JoinColumn(name = "categoryId")
     private Category category;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public void setSpecial_Price() {
+        this.special_Price = price - (price *(discount/100));
+    }
 }
