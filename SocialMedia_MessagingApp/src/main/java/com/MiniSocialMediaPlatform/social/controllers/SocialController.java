@@ -29,4 +29,11 @@ public class SocialController {
     }
 
 
+    @DeleteMapping("/social/users/{userId}")
+    public ResponseEntity<String> DeleteUsers(@PathVariable Long userId) {
+        return new ResponseEntity<>(socialService.deleteUsers(userId), HttpStatus.OK);
+    }
+
+
+
 }

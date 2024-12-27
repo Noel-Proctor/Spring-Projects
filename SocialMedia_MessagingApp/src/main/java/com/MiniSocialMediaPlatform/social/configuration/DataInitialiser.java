@@ -45,6 +45,11 @@ public class DataInitialiser {
                 socialUserRepository.save(socialUser1);
                 socialUserRepository.save(socialUser2);
 
+//                Fetch Types
+
+                System.out.println("FETCHING USER");
+                socialUserRepository.findById( 1L);
+
                 SocialGroup group = new SocialGroup();
                 SocialGroup group1 = new SocialGroup();
                 SocialGroup group2 = new SocialGroup();

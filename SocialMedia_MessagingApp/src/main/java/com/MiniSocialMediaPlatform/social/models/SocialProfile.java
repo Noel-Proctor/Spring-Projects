@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Objects;
 
@@ -18,10 +19,18 @@ public class SocialProfile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     @OneToOne()
     @JoinColumn(name = "social_user")
     @JsonIgnore
     private SocialUser user;
+
+//    public void setUser(SocialUser user) {
+//        this.user = user;
+//        if (user.getProfile() != this) {
+//            user.setProfile(this);
+//        }
+//    }
 
     private String description;
 

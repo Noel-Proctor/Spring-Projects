@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.*;
 
@@ -20,8 +21,14 @@ public class SocialUser {
 
     private String username;
 
-    @OneToOne(mappedBy = "user")
+
+    @OneToOne(mappedBy = "user", cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
     private SocialProfile profile;
+
+    public void setProfile(SocialProfile profile) {
+        profile.setUser(this);
+        this.profile = profile;
+    }
 
     @OneToMany(mappedBy = "user")
     private List<Post> posts = new ArrayList<>();
