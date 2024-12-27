@@ -11,6 +11,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductServiceImplementation implements ProductService{
 
@@ -43,19 +45,94 @@ public class ProductServiceImplementation implements ProductService{
         product.setSpecial_Price(
                 product.getPrice() - (product.getPrice()*(productDTO.getDiscount()/100))
         );
-        return modelMapper.map(productRepository.save(product), ProductDTO.class);
+        Product savedProduct = productRepository.save(product);
+        return modelMapper.map(savedProduct, ProductDTO.class);
 
 
 
     }
 
     @Override
-    public ProductDTO updateProduct(ProductDTO productDTO) {
-        return null;
+    public ProductDTO updateProduct(ProductDTO productDTO, long productId) {
+
+        Product product = productRepository.findById(productId).orElseThrow(
+                () -> new ResourceNotFoundException("Product", "id", productId)
+        );
+
+        product.setImage(productDTO.getImage());
+        product.setProductName(productDTO.getProductName());
+        product.setDescription(productDTO.getDescription());
+        product.setPrice(productDTO.getPrice());
+        product.setDiscount(productDTO.getDiscount());
+        product.setSpecial_Price(product.getPrice() - (product.getPrice()*(productDTO.getDiscount()/100)));
+
+        product = productRepository.save(product);
+        return modelMapper.map(product, ProductDTO.class);
     }
 
     @Override
     public ProductDTO deleteProduct(Long productId) {
         return null;
+    }
+
+    @Override
+    public ProductResponse getProductsByCategoryId(Long categoryId,Integer pageNumber, Integer pageSize, String direction, String field) {
+
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("Category", "id", categoryId)
+                );
+
+        List<Product> products = productRepository.findByCategoryOrderByPriceAsc(category);
+        List<ProductDTO> productDTOS = products.stream().map(product -> modelMapper.map(product, ProductDTO.class)).toList();
+
+        ProductResponse productResponse = new ProductResponse();
+        productResponse.setContent(productDTOS);
+
+        return productResponse;
+
+
+//        Sort sortAndOrderBy = direction.equalsIgnoreCase("asc") ? Sort.by(field).ascending() : Sort.by(field).descending();
+//
+//        Pageable pageable = PageRequest.of(pageNumber,pageSize, sortAndOrderBy);
+//        Page<Product> productPage= productRepository.findAll(pageable);
+//
+//        List<Product> products = productPage.getContent();
+//
+//        if(products.isEmpty()){
+//            throw new APIException("No products currently available");
+//        }
+//
+//        List<ProductDTO> productDTOS = products.stream().map(product -> modelMapper.map(product, ProductDTO.class)).toList();
+//
+//        ProductResponse productResponse = new ProductResponse();
+//        productResponse.setContent(productDTOS);
+//        productResponse.setPageNumber(productPage.getNumber());
+//        productResponse.setPageSize(productPage.getSize());
+//        productResponse.setLastPage(productPage.isLast());
+//        productResponse.setTotalPages(productPage.getTotalPages());
+//        productResponse.setTotalElements(productPage.getNumberOfElements());
+//        return productResponse;
+    }
+
+
+
+    @Override
+    public ProductResponse getAllProducts() {
+        List<Product> products = productRepository.findAll();
+        List<ProductDTO> productDTOs = products.stream().map(product -> modelMapper.map(product, ProductDTO.class)).toList();
+
+        ProductResponse productResponse = new ProductResponse();
+        productResponse.setContent(productDTOs);
+        return productResponse;
+    }
+
+    @Override
+    public ProductResponse getProductsByKeyword(String keyword) {
+        List<Product> products = productRepository.findByProductNameLikeIgnoreCase("%"+keyword+"%");
+        List<ProductDTO> productDTOs = products.stream().map(product -> modelMapper.map(product, ProductDTO.class)).toList();
+        ProductResponse productResponse = new ProductResponse();
+        productResponse.setContent(productDTOs);
+        return productResponse;
     }
 }

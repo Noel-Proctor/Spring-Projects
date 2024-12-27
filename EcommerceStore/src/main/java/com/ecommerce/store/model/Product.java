@@ -15,12 +15,12 @@ import lombok.NoArgsConstructor;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy =GenerationType.AUTO)
-    private Long product_id;
+    @GeneratedValue(strategy =GenerationType.IDENTITY)
+    private Long productId;
 
     @NotBlank
     @Size(min = 5, max = 100, message = "Product description name must be between 0-255 characters long")
-    private String product_name;
+    private String productName;
 
     @NotBlank
     @Size(min = 5, max = 100, message = "Product description name must be between 0-255 characters long")
@@ -30,13 +30,13 @@ public class Product {
     private double price;
     private double special_Price;
     private String image;
-
+    private double discount;
 
     @ManyToOne
     @JoinColumn(name = "categoryId")
     private Category category;
 
-//    private double discount;
+
 
 
 
