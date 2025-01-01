@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "products")
 public class Product {
 
     @Id
@@ -38,8 +39,12 @@ public class Product {
     private double discount;
 
     @ManyToOne
-    @JoinColumn(name = "categoryId")
+    @JoinColumn(name = "category_Id")
     private Category category;
+
+    @ManyToOne
+    @JoinColumn(name ="seller_id")
+    private Users seller;
 
     public void setSpecial_Price() {
         this.special_Price = price - (price *(discount/100));

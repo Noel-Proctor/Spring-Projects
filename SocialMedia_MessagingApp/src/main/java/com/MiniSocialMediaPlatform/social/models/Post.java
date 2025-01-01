@@ -19,7 +19,7 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "User_Id")
     @JsonIgnore
     private SocialUser user;
