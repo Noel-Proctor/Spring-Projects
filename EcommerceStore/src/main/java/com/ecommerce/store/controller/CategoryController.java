@@ -6,6 +6,7 @@ import com.ecommerce.store.payload.CategoryDTO;
 import com.ecommerce.store.payload.CategoryResponse;
 import com.ecommerce.store.service.CategoryService.CategoryService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,11 +15,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/")
 public class CategoryController {
 
-    private final CategoryService categoryService;
-
-    public CategoryController(CategoryService categoryService) {
-        this.categoryService = categoryService;
-    }
+    @Autowired
+    private CategoryService categoryService;
 
 //    @GetMapping("/api/public/categories")
     @RequestMapping(path = "public/categories", method = RequestMethod.GET)
@@ -48,7 +46,7 @@ public class CategoryController {
     @RequestMapping(path="public/categories", method = RequestMethod.PUT)
     public ResponseEntity<CategoryDTO> updateCategory(@Valid @RequestBody CategoryDTO categoryDTO) {
             CategoryDTO updatedCategory = categoryService.updateCategory(categoryDTO);
-            return new ResponseEntity<CategoryDTO>(updatedCategory, HttpStatus.OK);
+            return new ResponseEntity<>(updatedCategory, HttpStatus.OK);
     }
 
 }

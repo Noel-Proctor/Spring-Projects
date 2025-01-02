@@ -21,7 +21,7 @@ import java.util.Set;
                 @UniqueConstraint(columnNames = "username"),
                 @UniqueConstraint(columnNames = "email")
         })
-public class Users {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +32,7 @@ public class Users {
     private String username;
 
     @NotBlank
-    @Size(min = 3, max = 50)
+    @Size(min = 3, max = 100)
     private String password;
 
     @NotBlank
@@ -70,13 +70,21 @@ public class Users {
     private List<Address> addresses = new ArrayList<>();
 
 
-    public Users(String username, String password, String firstName, String lastName, String email) {
+    public User(String username, String password, String firstName, String lastName, String email) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
     }
+
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
+
+
 
 
 

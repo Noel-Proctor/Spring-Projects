@@ -43,7 +43,7 @@ public class Address {
 
     @ManyToMany(mappedBy ="addresses")
     @ToString.Exclude
-    private List<Users> Users;
+    private List<User> Users;
 
 
     public Address(String street, String buildingName, String city, String county, String postcode) {

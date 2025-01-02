@@ -1,4 +1,4 @@
-package com.ecommerce.store.security.jwt;
+package com.ecommerce.store.security.requests;
 
 public class LoginRequest {
     private String username;

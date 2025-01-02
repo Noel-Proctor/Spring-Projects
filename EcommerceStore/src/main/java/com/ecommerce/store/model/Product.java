@@ -44,7 +44,7 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name ="seller_id")
-    private Users seller;
+    private User seller;
 
     public void setSpecial_Price() {
         this.special_Price = price - (price *(discount/100));

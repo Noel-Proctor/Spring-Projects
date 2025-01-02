@@ -4,8 +4,9 @@ package com.ecommerce.store.controller;
 import com.ecommerce.store.config.AppConstants;
 import com.ecommerce.store.payload.ProductDTO;
 import com.ecommerce.store.payload.ProductResponse;
-import com.ecommerce.store.service.CategoryService.ProductService;
+import com.ecommerce.store.service.ProductService.ProductService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,11 +19,8 @@ import java.util.Map;
 @RequestMapping("/api/")
 public class ProductController {
 
-    private final ProductService productService;
-
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
+    @Autowired
+    private ProductService productService;
 
     @PostMapping("admin/categories/{categoryId}/product")
     public ResponseEntity<ProductDTO> addProduct(@Valid @RequestBody ProductDTO productDTO,

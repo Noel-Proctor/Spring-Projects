@@ -1,4 +1,4 @@
-package com.ecommerce.store.service.CategoryService;
+package com.ecommerce.store.service.FileService;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

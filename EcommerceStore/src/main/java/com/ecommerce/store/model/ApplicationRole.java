@@ -1,6 +1,6 @@
 package com.ecommerce.store.model;
 
-public enum ApplicationRoles {
+public enum ApplicationRole {
 
     USER,
     SELLER,
