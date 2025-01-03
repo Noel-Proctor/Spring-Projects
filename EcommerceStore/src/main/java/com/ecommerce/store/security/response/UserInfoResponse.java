@@ -5,7 +5,7 @@ import java.util.List;
 
 public class UserInfoResponse {
 
-    private String jwtToken;
+    //private String jwtToken;
     private Long userId;
     private String username;
     private List<String> roles;
@@ -13,17 +13,23 @@ public class UserInfoResponse {
     public UserInfoResponse(Long userId, String username, List<String> roles, String jwtToken) {
         this.username = username;
         this.roles = roles;
-        this.jwtToken = jwtToken;
+//        this.jwtToken = jwtToken;
         this.userId = userId;
     }
 
-    public String getJwtToken() {
-        return jwtToken;
+    public UserInfoResponse(Long userId, String username, List<String> roles) {
+        this.userId = userId;
+        this.username = username;
+        this.roles = roles;
     }
 
-    public void setJwtToken(String jwtToken) {
-        this.jwtToken = jwtToken;
-    }
+//    //public String getJwtToken() {
+//        return jwtToken;
+//    }
+
+//    public void setJwtToken(String jwtToken) {
+//        this.jwtToken = jwtToken;
+//    }
 
     public String getUsername() {
         return username;

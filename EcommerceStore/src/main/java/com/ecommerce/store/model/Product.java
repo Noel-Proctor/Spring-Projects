@@ -49,4 +49,22 @@ public class Product {
     public void setSpecial_Price() {
         this.special_Price = price - (price *(discount/100));
     }
+
+    public Product(String productName, String description, int quantity, double price, String image,
+                   double discount, Category category, User seller) {
+        this.productName = productName;
+        this.description = description;
+        this.quantity = quantity;
+        this.price = price;
+        this.image = image;
+        this.discount = discount;
+        this.category = category;
+        this.seller = seller;
+
+        if (discount>0){
+            setSpecial_Price();
+        }else if (discount<=0){
+            this.special_Price = this.price;
+        }
+    }
 }

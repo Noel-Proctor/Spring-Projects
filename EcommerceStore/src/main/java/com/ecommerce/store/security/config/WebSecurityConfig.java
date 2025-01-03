@@ -1,16 +1,10 @@
 package com.ecommerce.store.security.config;
 
 
-import com.ecommerce.store.model.ApplicationRole;
-import com.ecommerce.store.model.Role;
-import com.ecommerce.store.model.User;
-import com.ecommerce.store.repositories.RoleRepository;
-import com.ecommerce.store.repositories.UserRepository;
 import com.ecommerce.store.security.Services.UserDetailsService.UserDetailsServiceImpl;
 import com.ecommerce.store.security.jwt.AuthEntryPointJwt;
 import com.ecommerce.store.security.jwt.AuthTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,8 +19,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import java.util.Set;
 
 @Configuration
 @EnableWebSecurity
@@ -98,77 +90,4 @@ public class WebSecurityConfig {
         return (web -> web.ignoring().requestMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources/**",
                 "/swagger-ui.html", "/webjars/**", "/configuration/security"));
     }
-
-
-    @Bean
-    public CommandLineRunner initData(RoleRepository roleRepository, UserRepository userRepository, PasswordEncoder passwordEncoder){
-
-        return args->{
-            Role userRole = roleRepository.findByRoleName(ApplicationRole.USER)
-                    .orElseGet(
-                            ()-> {
-                                Role newUserRole = new Role(ApplicationRole.USER);
-                                return roleRepository.save(newUserRole);
-                            });
-
-            Role sellerRole = roleRepository.findByRoleName(ApplicationRole.SELLER)
-                    .orElseGet(
-                            ()-> {
-                                Role newSellerRole = new Role(ApplicationRole.SELLER);
-                                return roleRepository.save(newSellerRole);
-                            });
-
-            Role adminRole = roleRepository.findByRoleName(ApplicationRole.ADMIN)
-                    .orElseGet(
-                            ()-> {
-                                Role newAdminRole = new Role(ApplicationRole.ADMIN);
-                                return roleRepository.save(newAdminRole);
-                            });
-
-            Set<Role> userRoles = Set.of(userRole);
-            Set<Role> sellerRoles = Set.of(sellerRole);
-            Set<Role> adminRoles = Set.of(adminRole);
-
-            if (!userRepository.existsByUsername("user1")){
-                User user = new User("user1", passwordEncoder.encode("123qwe"), "Bill", "Williamson", "dutchvanderlinesgang@gmail.com");
-                userRepository.save(user);
-            }
-
-            if (!userRepository.existsByUsername("seller1")){
-                User seller = new User("seller1",  passwordEncoder.encode("123qwe"), "Luke", "Littler", "dartsman2004@gmail.com");
-                userRepository.save(seller);
-
-            }
-
-            if (!userRepository.existsByUsername("admin1")){
-                User admin = new User("admin1",  passwordEncoder.encode("123qwe"), "Kekius", "Maximius", "spaceman@space.com");
-                userRepository.save(admin);
-
-            }
-
-            userRepository.findByUsername("user1").ifPresent(user->{
-                user.setRoles(userRoles);
-                userRepository.save(user);
-            });
-
-            userRepository.findByUsername("seller1").ifPresent(user->{
-                user.setRoles(sellerRoles);
-                userRepository.save(user);
-            });
-
-            userRepository.findByUsername("admin1").ifPresent(user->{
-                user.setRoles(adminRoles);
-                userRepository.save(user);
-            });
-        };
-
-
-    }
-
-
-
-
-
-
-
 }
