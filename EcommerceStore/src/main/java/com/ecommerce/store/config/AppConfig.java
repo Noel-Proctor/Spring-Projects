@@ -27,24 +27,24 @@ public class AppConfig {
 
         return args -> {
 
-            Role userRole = roleRepository.findByRoleName(ApplicationRole.USER)
+            Role userRole = roleRepository.findByRoleName(ApplicationRole.ROLE_USER)
                     .orElseGet(
                             ()-> {
-                                Role newUserRole = new Role(ApplicationRole.USER);
+                                Role newUserRole = new Role(ApplicationRole.ROLE_USER);
                                 return roleRepository.save(newUserRole);
                             });
 
-            Role sellerRole = roleRepository.findByRoleName(ApplicationRole.SELLER)
+            Role sellerRole = roleRepository.findByRoleName(ApplicationRole.ROLE_SELLER)
                     .orElseGet(
                             ()-> {
-                                Role newSellerRole = new Role(ApplicationRole.SELLER);
+                                Role newSellerRole = new Role(ApplicationRole.ROLE_SELLER);
                                 return roleRepository.save(newSellerRole);
                             });
 
-            Role adminRole = roleRepository.findByRoleName(ApplicationRole.ADMIN)
+            Role adminRole = roleRepository.findByRoleName(ApplicationRole.ROLE_ADMIN)
                     .orElseGet(
                             ()-> {
-                                Role newAdminRole = new Role(ApplicationRole.ADMIN);
+                                Role newAdminRole = new Role(ApplicationRole.ROLE_ADMIN);
                                 return roleRepository.save(newAdminRole);
                             });
 

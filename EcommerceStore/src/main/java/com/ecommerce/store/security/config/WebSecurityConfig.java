@@ -70,7 +70,10 @@ public class WebSecurityConfig {
 //                                .requestMatchers("api/public/**").permitAll()
                                 .requestMatchers("/swagger-ui/**").permitAll()
                                 .requestMatchers("/api/test/**").permitAll()
-                                .requestMatchers("/images/**").permitAll().anyRequest().authenticated()
+                                .requestMatchers("/images/**").permitAll()
+                                .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                                .anyRequest()
+                                .authenticated()
                 );
 
         http.authenticationProvider(authenticationProvider());
