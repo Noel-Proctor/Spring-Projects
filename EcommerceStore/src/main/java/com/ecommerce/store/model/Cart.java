@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "cart")
+@Table(name = "carts")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Cart {
@@ -26,6 +26,4 @@ public class Cart {
     private List<CartItem> cartItems = new ArrayList<>();
 
     private Double totalPrice = 0.0;
-
 }
-
