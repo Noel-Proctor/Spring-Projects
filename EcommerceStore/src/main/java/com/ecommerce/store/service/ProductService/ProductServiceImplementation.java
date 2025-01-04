@@ -65,7 +65,7 @@ public class ProductServiceImplementation implements ProductService{
         Product product = modelMapper.map(productDTO, Product.class);
         product.setImage("default.png");
         product.setCategory(category);
-        product.setSpecial_Price();
+        product.setSpecialPrice();
         Product savedProduct = productRepository.save(product);
         return modelMapper.map(savedProduct, ProductDTO.class);
     }
@@ -84,7 +84,7 @@ public class ProductServiceImplementation implements ProductService{
         product.setDescription(productDTO.getDescription());
         product.setPrice(productDTO.getPrice());
         product.setDiscount(productDTO.getDiscount());
-        product.setSpecial_Price();
+        product.setSpecialPrice();
 
         Product savedProduct = productRepository.save(product);
         return modelMapper.map(savedProduct, ProductDTO.class);

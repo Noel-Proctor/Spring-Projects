@@ -7,6 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -31,7 +34,7 @@ public class Product {
 
     @DecimalMin(value = "0.1", message = "Please enter a price greater than 0.")
     private double price;
-    private double special_Price;
+    private double specialPrice;
     private String image;
 
     @DecimalMax(value = "80.00", message = "Discount cannot be greater than 80%. " +
@@ -46,8 +49,11 @@ public class Product {
     @JoinColumn(name ="seller_id")
     private User seller;
 
-    public void setSpecial_Price() {
-        this.special_Price = price - (price *(discount/100));
+    @OneToMany(mappedBy = "product", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    private List<CartItem> products = new ArrayList<>();
+
+    public void setSpecialPrice() {
+        this.specialPrice = price - (price *(discount/100));
     }
 
     public Product(String productName, String description, int quantity, double price, String image,
@@ -62,9 +68,9 @@ public class Product {
         this.seller = seller;
 
         if (discount>0){
-            setSpecial_Price();
+            setSpecialPrice();
         }else if (discount<=0){
-            this.special_Price = this.price;
+            this.specialPrice = this.price;
         }
     }
 }
