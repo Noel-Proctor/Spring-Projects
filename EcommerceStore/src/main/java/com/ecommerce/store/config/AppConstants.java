@@ -8,4 +8,16 @@ public class AppConstants {
     public static final String CATEGORY_SORT_ORDER = "ASC";
     public static final String PRODUCT_SORT_BY = "productName";
     public static final String DIRECTION = "ASC";
+
+    public static final boolean RESET_DATABASE = false;
+    public static final DBType DATABASE_ENGINE = DBType.POSTGRES;
+
+
+    public enum DBType{
+        POSTGRES, MYSQL
+    }
+
+
 }
+
+

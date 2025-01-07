@@ -63,10 +63,8 @@ public class User {
     private Set<Product> products;
 
     @Getter
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinTable(name= "User_Address",
-    joinColumns = @JoinColumn(name = "user_Id"),
-    inverseJoinColumns =  @JoinColumn(name = "address_id"))
+    @Setter
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     private List<Address> addresses = new ArrayList<>();
 
     @OneToOne(mappedBy = "user", cascade= {CascadeType.PERSIST, CascadeType.MERGE})
