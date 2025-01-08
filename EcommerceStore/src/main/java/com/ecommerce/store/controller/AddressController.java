@@ -4,9 +4,11 @@ import com.ecommerce.store.config.AppConstants;
 import com.ecommerce.store.model.User;
 import com.ecommerce.store.payload.AddressDTO;
 import com.ecommerce.store.payload.AddressResponse;
+import com.ecommerce.store.security.response.MessageResponse;
 import com.ecommerce.store.service.AddressService.AddressService;
 import com.ecommerce.store.util.AuthUtil;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,6 +45,19 @@ public class AddressController {
     public ResponseEntity<AddressDTO> getUserAddresses(@PathVariable Long addressId){
         AddressDTO addressDto = addressService.getSpecificAddress(addressId);
         return new ResponseEntity<>(addressDto, HttpStatus.FOUND);
+    }
+
+
+    @PutMapping("/address/{addressId}")
+    public ResponseEntity<AddressDTO> updateAddressById(@PathVariable Long addressId, @Valid @RequestBody AddressDTO addressDTO){
+        AddressDTO addressDto = addressService.updateAddressById(addressId, addressDTO);
+        return new ResponseEntity<>(addressDto, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/address/{addressId}")
+    public ResponseEntity<MessageResponse> deleteAddressById(@NotNull @PathVariable Long addressId){
+        MessageResponse message = addressService.deleteAddress(addressId);
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
 
