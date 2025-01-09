@@ -119,7 +119,7 @@ The response will be a JSON object containing the user's information, including 
 
 The request body should be a JSON object containing the following fields:
 
-	name (String): The name of the category.
+name (String): The name of the category.
 
 		Example URL: http://localhost:8080/api/public/categories
 	
@@ -555,4 +555,80 @@ cartId (Long): The ID of the cart from which the product is to be deleted.
 	json
 	{
 	    "status": "Product 'Laptop' removed from cart."
+	}
+
+
+***PLACE ORDER***
+
+**1. Place Order -  /order/users/payments/{paymentMethod} - Method: POST**
+
+This endpoint allows the user to place an order using the specified payment method.
+
+Path Parameters
+paymentMethod (String): The payment method to be used for placing the order. Example values might be creditcard, paypal, etc.
+
+Request Body
+The request body should be a JSON object containing the order details.
+
+Response
+The response will be a JSON object containing the details of the placed order.
+
+	Example Request: http://localhost:8080/api/order/users/payments/mastercard  	
+	Example Request Body:
+
+	json
+	{
+	    "addressId": 2,
+	    "paymentMethod": "mastercard",
+	    "pgName": "Stripe",
+	    "pgPaymentId" : "x323RTG4tRdK76G",
+	    "pgStatus": "Payment Processed",
+	    "pgResponseMessage": "200 Success"
+	}
+
+
+
+	Example Response:
+
+	json
+	{
+	    "orderId": 7,
+	    "email": "spaceman@space.com",
+	    "orderDate": "2025-01-09",
+	    "orderStatus": "PROCESSING",
+	    "total_Amount": 2365.98,
+	    "orderItems": [
+	        {
+	            "orderItemId": 6,
+	            "discount": 0.0,
+	            "orderedProductPrice": 1182.99,
+	            "quantity": 2,
+	            "product": {
+	                "productId": 7,
+	                "productName": "Laptop",
+	                "description": "Game and code all day.",
+	                "image": "default.png",
+	                "price": 1182.99,
+	                "discount": 0.0,
+	                "specialPrice": 1182.99,
+	                "categoryId": 5
+	            }
+	        }
+	    ],
+	    "payment": {
+	        "paymentId": 7,
+	        "paymentMethod": "mastercard",
+	        "pgPaymentId": "x323RTG4tRdK76G",
+	        "pgStatus": "Payment Processed",
+	        "pgResponseMessage": "200 Success",
+	        "pgName": "Stripe"
+	    },
+	    "address": {
+	        "addressId": "2",
+	        "street": "Example Street",
+	        "buildingName": "Example Building",
+	        "city": "Example Town",
+	        "county": "Example County",
+	        "postcode": "CE2 5RT"
+	    }
 	}
