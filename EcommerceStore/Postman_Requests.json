@@ -1,0 +1,664 @@
+{
+	"info": {
+		"_postman_id": "538a44f7-df64-4727-9659-35ef4028892f",
+		"name": "Spring Ecommerce Poject API Requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "40386009"
+	},
+	"item": [
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Create New Category",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTczNTg0NDkzMiwiZXhwIjoxNzM1ODQ1OTMyfQ.41nkaxcWxAHg-UUrAnIPGsIBRJGd1fxSKJDsRAxK9WQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoryName\": \"Technology\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/public/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"public",
+								"categories"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Noel",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoryId\": 1,\r\n    \"categoryName\": \"Fishing & WaterSports\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/public/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"public",
+								"categories"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Noel",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Categories",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTczNTg5NzUwMCwiZXhwIjoxNzM1ODk4NTAwfQ.Jb_pJmcHrc9oT7YFbPv0kByy55opEzxX4ZgaV7rSQu4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/public/categories?page=0&pageSize=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"public",
+								"categories"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoryId\": 2\r\n}"
+						},
+						"url": "http://localhost:8080/api/admin/categories/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Create Product",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTczNTg0NDkzMiwiZXhwIjoxNzM1ODQ1OTMyfQ.41nkaxcWxAHg-UUrAnIPGsIBRJGd1fxSKJDsRAxK9WQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productName\": \"Smart Watch\",\r\n    \"description\": \"Never be late again\",\r\n    \"quantity\": \"100\",\r\n    \"price\":\"560.99\",\r\n    \"discount\": \"5\",\r\n    \"categoryId\": \"5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/admin/categories/product"
+					},
+					"response": []
+				},
+				{
+					"name": "GetProducts",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTczNTg5NzUwMCwiZXhwIjoxNzM1ODk4NTAwfQ.Jb_pJmcHrc9oT7YFbPv0kByy55opEzxX4ZgaV7rSQu4",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/public/products?pageSize=5&pageNumber=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"public",
+								"products"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "5"
+								},
+								{
+									"key": "pageNumber",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetProductsByCategory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/public/categories/5/products?pageNumber=0&pageSize=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"public",
+								"categories",
+								"5",
+								"products"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetProductsByKeyword",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/public/products/keyword/watch?pageNumber=0&pageSize=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"public",
+								"products",
+								"keyword",
+								"watch"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"productName\": \" Ud\",\r\n            \"description\": \"For catching even better fish\",\r\n            \"image\": \"default.png\",\r\n            \"quantity\": 3,\r\n            \"price\": 200.0,\r\n            \"discount\": 81.0,\r\n            \"special_Price\": 75.0,\r\n            \"categoryName\": \"Fishing\"\r\n\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/admin/products/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product Image",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/noelp/OneDrive/Pictures/telescopic-fishing-rod.jpg"
+								}
+							]
+						},
+						"url": "http://localhost:8080/api/admin/products/3/image"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"productName\": \" Updated Fishing Rod\",\r\n            \"description\": \"For catching even better fish\",\r\n            \"image\": \"default.png\",\r\n            \"quantity\": 3,\r\n            \"price\": 200.0,\r\n            \"discount\": 55.0,\r\n            \"special_Price\": 75.0,\r\n            \"categoryName\": \"Fishing\"\r\n\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/admin/products/4"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Multiple Products",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {   \r\n        \"productName\": \"12Ft Beach Fishing Rod\",\r\n\t\t\"description\": \"Catch the big one\",\r\n\t\t\"quantity\": \"20\",\r\n\t\t\"price\":\"160.\",\r\n\t\t\"discount\": \"5\",\r\n\t\t\"categoryId\": \"2\"\r\n    },\r\n\r\n    {   \r\n        \"productName\": \"8Ft Lure Fishing Rod\",\r\n\t\t\"description\": \"Great for Bass and Pollock\",\r\n\t\t\"quantity\": \"20\",\r\n\t\t\"price\":\"82.99\",\r\n\t\t\"discount\": \"0\",\r\n\t\t\"categoryId\": \"2\"\r\n    },\r\n\t\r\n\t{   \r\n        \"productName\": \"Laptop\",\r\n\t\t\"description\": \"Game and code all day.\",\r\n\t\t\"quantity\": \"14\",\r\n\t\t\"price\":\"1182.99\",\r\n\t\t\"discount\": \"0\",\r\n\t\t\"categoryId\": \"5\"\r\n    },\r\n\t\r\n\t{   \r\n        \"productName\": \"Smart Watch\",\r\n\t\t\"description\": \"Never be late again.\",\r\n\t\t\"quantity\": \"140\",\r\n\t\t\"price\":\"190.99\",\r\n\t\t\"discount\": \"10\",\r\n\t\t\"categoryId\": \"5\"\r\n    },\r\n\t\r\n\t{   \r\n        \"productName\": \"Casserole Dish\",\r\n\t\t\"description\": \"Cook up a storm\",\r\n\t\t\"quantity\": \"32\",\r\n\t\t\"price\":\"100.99\",\r\n\t\t\"discount\": \"0\",\r\n\t\t\"categoryId\": \"4\"\r\n    },\r\n\t\r\n\t{   \r\n        \"productName\": \"Goalkeeper Gloves\",\r\n\t\t\"description\": \"Keep a clean sheet with these extra grippy gloves\",\r\n\t\t\"quantity\": \"4\",\r\n\t\t\"price\":\"10.50\",\r\n\t\t\"discount\": \"0\",\r\n\t\t\"categoryId\": \"3\"\r\n    },\r\n\t\r\n\t{   \r\n        \"productName\": \"Premier League Ball\",\r\n\t\t\"description\": \"Howard Webb is raging that we got this.\",\r\n\t\t\"quantity\": \"21\",\r\n\t\t\"price\":\"20.00\",\r\n\t\t\"discount\": \"0\",\r\n\t\t\"categoryId\": \"3\"\r\n    }\r\n\t\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/admin/categories/products"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Sign In User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"user1\",\r\n    \"password\":\"123qwe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/auth/signin"
+					},
+					"response": []
+				},
+				{
+					"name": "Sign In User Admin",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin1\",\r\n    \"password\":\"123qwe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/auth/signin"
+					},
+					"response": []
+				},
+				{
+					"name": "Sign In Seller",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Seller1\",\r\n    \"password\":\"123qwe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/auth/signin"
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Out",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"user1\",\r\n    \"password\":\"123qwe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/auth/signout"
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"username\": \"admin1\",\r\n    \"password\": \"123qwe\",\r\n    \"firstName\": \"Admin User\",\r\n    \"lastName\": \"Admin User\",\r\n    \"email\": \"newemail@email.com\",\r\n    \"roles\": [\"admin\"]\r\n\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/auth/signup"
+					},
+					"response": []
+				},
+				{
+					"name": "GetUsername",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/auth/username"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Details",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/auth/user"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "Add Item To Cart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "http://localhost:8080/api/carts/products/7/quantity/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Admin - Fetch All Carts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/admin/carts"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Cart",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/carts/user/cart"
+					},
+					"response": []
+				},
+				{
+					"name": "Add/Remove product from cart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "http://localhost:8080/api/carts/products/5/update/delete"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Cart Item",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/api/carts/1/product/7"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Address",
+			"item": [
+				{
+					"name": "Add User Address",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"street\": \"Streety Street\",\r\n    \"buildingName\": \"Small House\",\r\n    \"city\": \"towny town\",\r\n    \"county\": \"down\",\r\n    \"postcode\": \"bt333PT\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/address"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Addresses",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/address?page=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"address"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Specific Address",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/address/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Address By Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"street\": \"Madison Avenue\",\r\n    \"buildingName\": \"The White House\",\r\n    \"city\": \"Trump Town\",\r\n    \"county\": \"Winning\",\r\n    \"postcode\": \"Ce2 5RT\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/address/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Address By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/api/address/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders & Payments",
+			"item": [
+				{
+					"name": "Place Order",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"addressId\": 2,\r\n    \"paymentMethod\": \"mastercard\",\r\n    \"pgName\": \"Stripe\",\r\n    \"pgPaymentId\" : \"x323RTG4tRdK76G\",\r\n    \"pgStatus\": \"Payment Processed\",\r\n    \"pgResponseMessage\": \"200 Success\"\r\n\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/order/users/payments/mastercard"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
