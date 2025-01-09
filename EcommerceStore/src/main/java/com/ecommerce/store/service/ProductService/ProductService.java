@@ -10,7 +10,7 @@ import java.util.Map;
 public interface ProductService {
 
 
-    ProductDTO addProduct(ProductDTO productDTO, Long categoryId);
+    ProductDTO addProduct(ProductDTO productDTO);
     ProductDTO updateProduct(ProductDTO productDTO, long productId);
     Map<String,ProductDTO> deleteProduct(Long productId);
     ProductResponse getProductsByCategoryId(Long categoryId, Integer pageNumber, Integer pageSize, String direction, String field);

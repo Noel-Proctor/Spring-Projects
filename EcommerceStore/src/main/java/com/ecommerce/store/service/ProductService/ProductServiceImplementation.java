@@ -56,11 +56,11 @@ public class ProductServiceImplementation implements ProductService{
     //    Add  and update Products
     //-------------------------------------------------------------
     @Override
-    public ProductDTO addProduct(ProductDTO productDTO, Long categoryId) {
+    public ProductDTO addProduct(ProductDTO productDTO) {
 
-        Category category = categoryRepository.findById(categoryId)
+        Category category = categoryRepository.findById(productDTO.getCategoryId())
                 .orElseThrow(
-                        () -> new ResourceNotFoundException("Category", "id", categoryId)
+                        () -> new ResourceNotFoundException("Category", "id", productDTO.getCategoryId())
                 );
         List<Product> productList = category.getProducts();
 
@@ -77,6 +77,8 @@ public class ProductServiceImplementation implements ProductService{
         product.setCategory(category);
         product.setSpecialPrice();
         Product savedProduct = productRepository.save(product);
+        category.getProducts().add(product);
+        categoryRepository.save(category);
         return modelMapper.map(savedProduct, ProductDTO.class);
     }
 

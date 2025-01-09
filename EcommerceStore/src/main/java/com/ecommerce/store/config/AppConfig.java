@@ -1,13 +1,12 @@
 package com.ecommerce.store.config;
 
-import com.ecommerce.store.model.*;
-import com.ecommerce.store.repositories.CategoryRepository;
-import com.ecommerce.store.repositories.ProductRepository;
+import com.ecommerce.store.model.ApplicationRole;
+import com.ecommerce.store.model.Role;
+import com.ecommerce.store.model.User;
 import com.ecommerce.store.repositories.RoleRepository;
 import com.ecommerce.store.repositories.UserRepository;
-import com.ecommerce.store.util.DatabaseCleanUpService;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,8 +17,7 @@ import java.util.Set;
 @Configuration
 public class AppConfig {
 
-    @Autowired
-    private DatabaseCleanUpService databaseCleanUpService;
+
 
     @Bean
     public ModelMapper modelMapper() {
@@ -27,14 +25,12 @@ public class AppConfig {
     }
 
     @Bean
-    public CommandLineRunner initData(RoleRepository roleRepository, UserRepository userRepository, PasswordEncoder passwordEncoder,
-                                      CategoryRepository categoryRepository, ProductRepository productRepository) {
+    @Transactional
+    public CommandLineRunner initData(RoleRepository roleRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
 
         return args -> {
 
             if (AppConstants.RESET_DATABASE){
-
-//                databaseCleanUpService.clearAllTables();
 
                 Role userRole = roleRepository.findByRoleName(ApplicationRole.ROLE_USER)
                         .orElseGet(
@@ -89,73 +85,13 @@ public class AppConfig {
                 {
                     seller = userRepository.findByUsername("seller1").get();
                     seller.setRoles(sellerRoles);
-                    seller = userRepository.save(seller);
+                    userRepository.save(seller);
                 }
 
                 userRepository.findByUsername("admin1").ifPresent(user->{
                     user.setRoles(adminRoles);
                     userRepository.save(user);
                 });
-
-
-//            Create Categories
-
-                Category fishingCategory = categoryRepository.findByCategoryName("Fishing");
-                if (fishingCategory ==null){
-                    fishingCategory = categoryRepository.save(new Category("Fishing"));
-                }
-
-                Category cookingCategory = categoryRepository.findByCategoryName("Cooking");
-                if (cookingCategory == null) {
-                    cookingCategory = categoryRepository.save(new Category("Cooking"));
-                }
-
-                Category sportsCategory = categoryRepository.findByCategoryName("Sports");
-                if (sportsCategory == null) {
-                    sportsCategory = categoryRepository.save(new Category("Sports"));
-                }
-
-
-//            Create Products
-                if(!productRepository.existsByProductNameAndCategory("12 ft Fishing Rod", fishingCategory)){
-                    Product newProduct = new Product("12ft Fishing Rod",
-                            "Great for all types of fishing", 10, 80.00, "default.png", 5,
-                            fishingCategory, seller);
-                    productRepository.save(newProduct);
-
-                }
-
-                if(!productRepository.existsByProductNameAndCategory("Fishing Net", fishingCategory)){
-                    Product newProduct = new Product("Fishing Net",
-                            "Don't let them get away", 20, 20.00, "default.png", 10,
-                            fishingCategory, seller);
-                    productRepository.save(newProduct);
-
-                }
-
-                if(!productRepository.existsByProductNameAndCategory("Casserole Dish", cookingCategory)){
-                    Product newProduct = new Product("Casserole Dish",
-                            "Yum Yum in my tum", 230, 66.00, "default.png", 0,
-                            cookingCategory, seller);
-                    productRepository.save(newProduct);
-
-                }
-
-                if(!productRepository.existsByProductNameAndCategory("Football", sportsCategory)){
-                    Product newProduct = new Product("Football",
-                            "A literal football", 30, 10.00, "default.png", 10,
-                            sportsCategory, seller);
-                    productRepository.save(newProduct);
-
-                }
-
-                if(!productRepository.existsByProductNameAndCategory("Goal Keeper Gloves", sportsCategory)){
-                    Product newProduct = new Product("!!SALE!!-- Goal Keeper Gloves--!!SALE!!",
-                            "One day you will get picked to play outfield.", 30, 50.00, "default.png", 10,
-                            sportsCategory, seller);
-                    productRepository.save(newProduct);
-
-                }
 
                 System.out.println("Database has been reset");
 

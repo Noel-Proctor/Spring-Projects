@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -22,13 +24,24 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @PostMapping("admin/categories/{categoryId}/product")
-    public ResponseEntity<ProductDTO> addProduct(@Valid @RequestBody ProductDTO productDTO,
-                                                 @PathVariable Long categoryId){
+    @PostMapping("admin/categories/product")
+    public ResponseEntity<ProductDTO> addProduct(@Valid @RequestBody ProductDTO productDTO){
 
-         ProductDTO productAdded =productService.addProduct(productDTO, categoryId);
+         ProductDTO productAdded =productService.addProduct(productDTO);
 
         return new ResponseEntity<>(productAdded,HttpStatus.CREATED);
+    }
+
+    @PostMapping("admin/categories/products")
+    public ResponseEntity<List<ProductDTO>> addMultipleProduct(@Valid @RequestBody List<ProductDTO> productDTOList){
+
+        List<ProductDTO> addedProducts = new ArrayList<>();
+        for (ProductDTO productDTO : productDTOList) {
+            ProductDTO productAdded =productService.addProduct(productDTO);
+            addedProducts.add(productAdded);
+        }
+
+        return new ResponseEntity<>(addedProducts,HttpStatus.CREATED);
     }
 
 
