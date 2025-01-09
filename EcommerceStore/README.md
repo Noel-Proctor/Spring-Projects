@@ -1,13 +1,12 @@
+**Ecommerce Store**
+
 This is a Spring Boot application to serve as a backend for an online Ecommerce website.
 
 The applications consists of several REST APIs that allow the admin to manange products, categories and orders, and sellers and customers to upload products and place orders. 
 
-ENDPOINTS:
+**ENDPOINTS**
 
-1. Sign In -This endpoint allows the user to authenticate using their username and password.
-
-HTTP-vMethod POST
-
+**1. Sign In - Method POST**
 URL - /api/auth/signin
 
 The request body should be a JSON object containing the following fields:
