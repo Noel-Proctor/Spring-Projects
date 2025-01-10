@@ -4,7 +4,7 @@ This is a Spring Boot application to serve as a backend for an online Ecommerce 
 
 The applications consists of several REST APIs that allow the admin, users and sellers to manage products and categories, add items to their cart, and place orders. 
 
-Improvements: 
+Future Improvements: 
 - Add Tests.
 - Improve validations.
 - Improve security. While all endpoints require authentication (except Signup), role and authorisation validation has not yet been completed.
