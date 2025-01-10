@@ -12,7 +12,6 @@ Future Improvements:
 Upcoming enhancements: 
 - I am currently working on a Front end for the application.
 
-If you have any suggestions or would like to contact me, please do so at noelproctor@hotmail.co.uk.
 
 ***AUTHENTICATION ENDPOINTS***
 
