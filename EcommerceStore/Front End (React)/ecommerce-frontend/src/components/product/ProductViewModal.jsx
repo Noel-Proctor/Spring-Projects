@@ -30,8 +30,6 @@ function ProductViewModal({ isOpen, setIsOpen, product, isAvailable }) {
                                 <DialogTitle as="h1" className="lg:text-3xl cm:text-2xl text-xl font-semibold leading-6 text-gray-800 mb-4 mt-5">
                                     {productName}
                                 </DialogTitle>
-
-
                             </div>
 
                             <p className="mt-2 text-sm/6 text-slate-600/50">
