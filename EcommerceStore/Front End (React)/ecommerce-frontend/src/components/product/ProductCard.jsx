@@ -34,7 +34,7 @@ function ProductCard({
                 </div>
 
                 <div className="flex items-centre justify-between">
-                    {specialPrice ? (
+                    {discount && specialPrice ? (
                         <div className="flex flex-col">
                             <span className="text-gray-400 line-through">£{Number(price).toFixed(2)}</span>
                             <span className="text-gray-700 font-bold text-xl">£{Number(specialPrice).toFixed(2)}</span>

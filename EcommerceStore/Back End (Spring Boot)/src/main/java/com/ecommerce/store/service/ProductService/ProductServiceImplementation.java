@@ -52,6 +52,12 @@ public class ProductServiceImplementation implements ProductService{
 
     @Value("${project.image}")
     private String path;
+
+    @Value("${image.base.url}")
+    String imageBaseUrl;
+
+
+
     //-------------------------------------------------------------
     //    Add  and update Products
     //-------------------------------------------------------------
@@ -219,7 +225,10 @@ public class ProductServiceImplementation implements ProductService{
 
 
     private ProductResponse getProductResponse(Page<Product> productPage, List<Product> products) {
-        List<ProductDTO> productDTOS = products.stream().map(product -> modelMapper.map(product, ProductDTO.class)).toList();
+        List<ProductDTO> productDTOS = products.stream().map(product -> {
+            product.setImage(constructImageURL(product.getImage()));
+            return modelMapper.map(product, ProductDTO.class);
+        }).toList();
 
         ProductResponse productResponse = new ProductResponse();
         productResponse.setContent(productDTOS);
@@ -231,4 +240,12 @@ public class ProductServiceImplementation implements ProductService{
         return productResponse;
     }
 
+
+    private String constructImageURL(String imageName){
+        return imageBaseUrl.endsWith("/") ? imageBaseUrl + imageName : imageBaseUrl+ "/" + imageName;
+
+
+    }
+
 }
+
