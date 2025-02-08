@@ -33,7 +33,7 @@ function ProductCard({
                     <p className="text-gray-600 text-sm">{description}</p>
                 </div>
 
-                <div className="flex items-centre justify-between">
+                <div className="flex flex-col sm:flex-row items-centre justify-between">
                     {discount && specialPrice ? (
                         <div className="flex flex-col">
                             <span className="text-gray-400 line-through">£{Number(price).toFixed(2)}</span>
@@ -50,7 +50,7 @@ function ProductCard({
                     <button disabled={!isAvailable || btnLoader}
                         onClick={() => { }}
                         className={`bg-blue-500 ${isAvailable ? "opacity-100 hover:bg-blue-600" : "opacity-70"}
-                                 text-white py-2 px-3 rounded-lg items-center transition-colors duration-300 w-36 flex justify-center`}>
+                                 text-white py-2 px-3 rounded-lg items-center transition-colors duration-300 w-full sm:w-36 flex justify-center mt-4 sm:mt-0`}>
                         <FaShoppingCart className="mr-2"></FaShoppingCart>
                         {isAvailable ? "Add To Cart" : "Sold Out"}
                     </button>
