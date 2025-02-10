@@ -1,43 +1,29 @@
-import { useEffect } from "react";
-import { FaExclamationTriangle } from 'react-icons/fa'
+
+
 import ProductCard from "./ProductCard";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../../store/actions";
-import Filter from "../Filter";
+import { useSelector } from "react-redux";
+import Filter from "./Filter";
 import useProductFilter from "./useProductFilter";
+import Loader from "../common/Loader";
+import ErrorMessage from '../common/ErrorMessage';
+import PaginationComponent from "../common/PaginagtionComponent";
 
 
 
 function Product() {
 
     const { isLoading, errorMessage } = useSelector(state => state.errors);
-    const { products } = useSelector((state) => state.products);
-    const dispatch = useDispatch();
+    const { products, categories, pagination } = useSelector((state) => state.products);
 
     useProductFilter();
 
-    useEffect(() => {
-        dispatch(fetchProducts());
-
-    }, [dispatch]);
-
-
-    useEffect(() => {
-        console.log(products);
-    }, [])
-
-
     return (
         <div className="lg:px-8 px-4 py-14 2xl:w-[90%] 2xl:mx-auto">
-            <Filter></Filter>
+            <Filter categories={categories ? categories : []}></Filter>
 
-            {isLoading ? (<p>Products Loading</p>)
-                : errorMessage ? (<div className="flex justify-center items-center h-[200px]">
-                    <FaExclamationTriangle className="text-slate-800 text-3xl mr-2"></FaExclamationTriangle>
-                    <span className="text-slate-800 text-lg font-medium">
-                        {errorMessage}
-                    </span>
-                </div>
+
+            {isLoading ? (<Loader />)
+                : errorMessage ? (<ErrorMessage errorMessage={errorMessage} errorText="Opps. Something went wrong." />
                 )
                     : (
                         <div className="min-h-[700px]">
@@ -47,6 +33,11 @@ function Product() {
                                     <ProductCard key={product.productId} {...product}></ProductCard>
                                 ))}
                             </div>
+
+                            <PaginationComponent numberOfPages={pagination.totalPages}>
+
+                            </PaginationComponent>
+
                         </div>
                     )}
         </div>

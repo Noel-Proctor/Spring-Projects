@@ -26,7 +26,7 @@ public class Product {
     private String productName;
 
     @NotBlank
-    @Size(min = 5, max = 100, message = "Product description name must be between 5-255 characters long")
+    @Size(min = 5, max = 300, message = "Product description name must be between 5-300 characters long")
     private String description;
 
     @Min(value =0, message ="Please enter a quantity greater than or equal to 0.")

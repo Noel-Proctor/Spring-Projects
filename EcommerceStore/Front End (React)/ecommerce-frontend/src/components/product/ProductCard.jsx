@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import ProductViewModal from "./ProductViewModal";
+import { trimToSize } from "../../utils";
 
 function ProductCard({
     id, productName, image, description, quantity, price, discount, specialPrice
@@ -27,10 +28,10 @@ function ProductCard({
             </div>
             <div className="p-4" >
                 <h2 className="text-lg font-semibold mb-2 cursor-pointer">
-                    {productName}
+                    {trimToSize(productName, 30)}
                 </h2>
                 <div className="min-h-20 max-h-20">
-                    <p className="text-gray-600 text-sm">{description}</p>
+                    <p className="text-gray-600 text-sm">{trimToSize(description, 130)}</p>
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-centre justify-between">

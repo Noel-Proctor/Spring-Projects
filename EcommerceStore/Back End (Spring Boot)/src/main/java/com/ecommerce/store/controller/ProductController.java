@@ -62,8 +62,10 @@ public class ProductController {
             @RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
             @RequestParam(name = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,
             @RequestParam(name = "direction", defaultValue = AppConstants.DIRECTION, required = false) String direction,
-            @RequestParam(name = "orderBy", defaultValue = AppConstants.PRODUCT_SORT_BY, required = false) String orderBy) {
-        ProductResponse productResponse = productService.getAllProducts(pageNumber,pageSize,direction,orderBy);
+            @RequestParam(name = "orderBy", defaultValue = AppConstants.PRODUCT_SORT_BY, required = false) String orderBy,
+            @RequestParam(name = "keyword", required = false) String keyword,
+            @RequestParam(name = "category", required = false) String category){
+        ProductResponse productResponse = productService.getAllProducts(pageNumber,pageSize,direction,orderBy,keyword,category);
         return new ResponseEntity<>(productResponse, HttpStatus.OK);
 
     }

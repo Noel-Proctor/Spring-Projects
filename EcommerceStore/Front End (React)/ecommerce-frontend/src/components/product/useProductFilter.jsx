@@ -1,12 +1,17 @@
 import { useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { fetchProducts } from "../../store/actions";
+import { fetchProducts, fetchCategories } from "../../store/actions";
 
 const useProductFilter = () => {
 
     const [searchParams] = useSearchParams();
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchCategories());
+    }, [dispatch]);
+
 
 
     useEffect(() => {
@@ -17,9 +22,11 @@ const useProductFilter = () => {
         const keyword = searchParams.get("keyword") || null;
         const category = searchParams.get("category") || null;
 
+
         params.set("orderBy", "price");
         params.set("direction", orderBy);
         params.set("pageNumber", currentPage - 1);
+        // params.set("pageSize", 4)
 
 
         if (category) {
@@ -30,11 +37,9 @@ const useProductFilter = () => {
             params.set("keyword", keyword);
         }
 
-
         const queryString = params.toString();
 
         dispatch(fetchProducts(queryString));
-
 
     }, [dispatch, searchParams])
 

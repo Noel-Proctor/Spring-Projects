@@ -5,13 +5,8 @@ import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { MdSearch } from "react-icons/md";
 
 
-function Filter() {
+function Filter({ categories }) {
 
-    const categories = [
-        { categoryId: 1, categoryName: "Technology" },
-        { categoryId: 2, categoryName: "Sports" },
-        { categoryId: 3, categoryName: "Cooking" }
-    ];
 
     const [category, setCategory] = useState("all");
     const [sortOrder, setSortOrder] = useState("asc");
@@ -43,6 +38,7 @@ function Filter() {
             params.set("category", selectedCategory);
         }
 
+        params.set("page", 1)
         navigate(`${pathname}?${params}`);
         setCategory(event.target.value);
 
@@ -63,6 +59,7 @@ function Filter() {
             params.set("keyword", keyword)
         }
 
+        params.set("page", 1)
         navigate(`${pathname}?${params}`);
     };
 
