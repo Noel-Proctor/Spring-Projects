@@ -2,6 +2,8 @@ import { useState } from 'react'
 import './App.css'
 import Products from './components/product/Products'
 import { Toaster } from 'react-hot-toast'
+import { Route, Routes } from 'react-router-dom'
+import Home from './Home/Home'
 
 
 function App() {
@@ -10,7 +12,11 @@ function App() {
   return (
     <>
       <div><Toaster /></div>
-      <Products></Products>
+      <Routes>
+        <Route path="/" element={<Home></Home>}></Route>
+        <Route path="/products" element={<Products></Products>}></Route>
+      </Routes>
+
     </>
   )
 }

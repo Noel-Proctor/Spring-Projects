@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import ProductViewModal from "./ProductViewModal";
-import { trimToSize } from "../../utils";
+import { trimToSize } from "../../Utils/utils";
 
 function ProductCard({
     id, productName, image, description, quantity, price, discount, specialPrice
