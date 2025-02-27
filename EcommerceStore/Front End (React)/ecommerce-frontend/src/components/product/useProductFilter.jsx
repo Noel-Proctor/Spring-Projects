@@ -26,8 +26,6 @@ const useProductFilter = () => {
         params.set("orderBy", "price");
         params.set("direction", orderBy);
         params.set("pageNumber", currentPage - 1);
-        // params.set("pageSize", 4)
-
 
         if (category) {
             params.set("category", category);

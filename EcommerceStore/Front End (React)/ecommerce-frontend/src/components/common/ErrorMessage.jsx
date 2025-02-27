@@ -15,7 +15,7 @@ function ErrorMessage({ errorMessage, errorText }) {
         if (errorMessage) {
             toast.error(errorMessage)
         }
-    }, [errorMessage])
+    }, []);
 
     return (
 

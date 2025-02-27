@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, EffectFade, Autoplay } from 'swiper/modules';
+import { v4 as uuidv4 } from 'uuid';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -48,9 +49,11 @@ function Banner() {
         fetchData();
     }, []);
 
+    const swiperKey = uuidv4();
+
     return (
         <div className='py-2 rounded-md'>
-            <Swiper
+            <Swiper key={swiperKey}
                 spaceBetween={50}
                 slidesPerView={1}
                 grabCursor={true}
@@ -58,22 +61,25 @@ function Banner() {
                     delay: 10000,
                     disableOnInteraction: true
                 }}
-                navigation
+
                 modules={[Pagination, EffectFade, Navigation, Autoplay]}
                 pagination={{ clickable: true }}
                 scrollbar={{ draggable: true }}
             >
-                {bannerList.map((item, i) => (
-                    <div className="sm:h-[450px]">
-                        <SwiperSlide key={item.id}>
-                            <div className={`carousel-item rounded-md  ${colours[i]}  min-h-[340px] sm:h-[450px] content-center`}>
+                {bannerList.map((item, i) => {
+                    const slidekey = uuidv4();
+                    const linkKey = uuidv4();
+
+                    return (<div className="sm:h-[450px]">
+                        <SwiperSlide key={slidekey}>
+                            <div className={`carousel-item rounded-sm  ${colours[i]}  min-h-[340px] sm:h-[450px] content-center`}>
                                 <div className='flex items-center justify-center'>
                                     <div className="lg:flex justify-center sm:w-full lg:w-1/2 p-8">
                                         <div className='text-center'>
                                             <h3 className='text-3xl text-white'>{item.title}</h3>
                                             <h1 className='text-5xl text-white font-bold mt-3'>{item.subtitle}</h1>
                                             <p className=' text-white  mt-3'>{item.description}</p>
-                                            <Link className='mt-6 inline-block bg-black text-white py-2 px-4 rounded hover:bg-gray-800'
+                                            <Link key={linkKey} className='mt-6 inline-block bg-black text-white py-2 px-4 rounded hover:bg-gray-800'
                                                 to="products">Shop
                                             </Link>
                                         </div>
@@ -84,8 +90,9 @@ function Banner() {
                                 </div>
                             </div>
                         </SwiperSlide>
-                    </div>
-                ))}
+                    </div>);
+
+                })}
             </Swiper>
         </div>
     )
