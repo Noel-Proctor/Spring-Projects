@@ -52,7 +52,7 @@ function Banner() {
     const swiperKey = uuidv4();
 
     return (
-        <div className='py-2 rounded-md'>
+        <div className='py-6 rounded-md'>
             <Swiper key={swiperKey}
                 spaceBetween={50}
                 slidesPerView={1}
@@ -72,7 +72,7 @@ function Banner() {
 
                     return (<div className="sm:h-[450px]">
                         <SwiperSlide key={slidekey}>
-                            <div className={`carousel-item rounded-sm  ${colours[i]}  min-h-[340px] sm:h-[450px] content-center`}>
+                            <div className={`carousel-item rounded-md  ${colours[i]}  min-h-[340px] sm:h-[450px] content-center`}>
                                 <div className='flex items-center justify-center'>
                                     <div className="lg:flex justify-center sm:w-full lg:w-1/2 p-8">
                                         <div className='text-center'>
