@@ -1,6 +1,6 @@
 
-import Banner from "../components/common/Banner";
-import ProductCarousel from "../components/common/ProductCarousel";
+import Banner from "../common/Banner";
+import ProductCarousel from "../common/ProductCarousel";
 
 
 
@@ -8,7 +8,7 @@ function Home() {
 
     return (
         <div>
-            <div className="lg: px-6 sm: px-4">
+            <div className="lg:px-6 sm:px-4">
                 <Banner></Banner>
                 <div className="py-5">
                     <div className="flex flex-col justify-center items-center space-y-2">
